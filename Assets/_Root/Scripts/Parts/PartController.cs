@@ -1,35 +1,50 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 class PartController :MonoBehaviour
 {
     [SerializeField] private Camera _camera;
+    [SerializeField] private Transform _canvas;
     [SerializeField] private Transform _console;
     [SerializeField] private Transform _workPlace;
     [SerializeField] private Transform _offScreen;
 
-    [SerializeField] private PartMenuView _partMenuView;
+    private PartMenuView _partMenuView;
 
-    PartSelector _partSelector;
-    GameObject _part;
+    private PartSelector _partSelector;
+    private PartControll _partRotation;
+    private ToolMenu _toolMenu;
+
+    private GameObject _part;
 
 
     private void Awake()
     {
-        _partSelector = new PartSelector();
-        _partSelector.Init(_camera,SetWorkObject);
-        _partSelector.Active = true;
+        CreateView();
+        _partRotation = new PartControll(_workPlace);
+        _partSelector = new PartSelector(_camera, SetWorkObject);
+        _toolMenu = new ToolMenu(_camera, _canvas, BackToConsole);
+        _partSelector.Active = true;              
+    }
 
-        _partMenuView.Init(BackToConsole);
+    private void CreateView()
+    {
+        var viewObject = Resources.Load<GameObject>("UI/PartMenuView");
+        _partMenuView = UnityEngine.Object.Instantiate(viewObject, _canvas).GetComponent<PartMenuView>();
+        _partMenuView.Init(null); //поменять когда будет меню игры  
     }
 
     private void Update()
     {
         _partSelector.Action();
+        _partRotation.Action();
+        _toolMenu.Action();
     }
 
 
     private void SetWorkObject(GameObject part)
     {
+        Destroy(_partMenuView.gameObject);
         _console.parent = _offScreen;
         _console.localPosition = Vector3.zero;
         _console.rotation = Quaternion.identity;
@@ -39,16 +54,18 @@ class PartController :MonoBehaviour
         part.transform.rotation = Quaternion.Euler(0, 180, 0);
         _partSelector.Active = false;
         _part = part;
+        _toolMenu.Fill(part.GetComponent<IPart>().Type);        
     }
     private void BackToConsole()
     {
         _console.parent = _workPlace;
         _console.localPosition = Vector3.zero;
         _console.rotation = Quaternion.Euler(0,180,0);
-        //изменить когда будет меню
+
         _part.transform.parent = _console;
         _part.transform.position = _part.GetComponent<IPart>().InitialPosition;
         _part.transform.rotation = Quaternion.Euler(0, 180, 0);
         _partSelector.Active = true;
+        CreateView();
     }
 }

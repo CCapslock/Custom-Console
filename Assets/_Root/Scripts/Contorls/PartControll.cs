@@ -1,11 +1,17 @@
 using UnityEngine;
 
-public class PartRotation : MonoBehaviour
+public class PartControll
 {
-    [SerializeField] private float _rotationSpeed = 5f;
+    private Transform _rotationObject;
+    private float _rotationSpeed = 5f;
     private Vector2 _touchStartPoint;
 
-    private void Update()
+    public PartControll(Transform rotationObject)
+    {
+        _rotationObject = rotationObject;
+    }
+
+    public void Action()
     {
         if (Input.touchCount > 0)
         {
@@ -17,10 +23,10 @@ public class PartRotation : MonoBehaviour
                     break;
                 case TouchPhase.Moved:
                     float x = touch.deltaPosition.x * -1 * _rotationSpeed * Time.deltaTime;
-                    float y = touch.deltaPosition.y * _rotationSpeed * Time.deltaTime; 
-                    transform.Rotate(y, x, 0);
+                    float y = touch.deltaPosition.y * _rotationSpeed * Time.deltaTime;
+                    _rotationObject.Rotate(y, x, 0);
                     break;
-            }
+            }// добавить зум и обсудить удобство управления
         }
     }
 }

@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -10,7 +7,7 @@ public class PartSelector
     private Camera _camera;
     private UnityAction<GameObject>  SetWorkObject;
 
-    public void Init(Camera camera, UnityAction<GameObject> setWorkObject)
+    public PartSelector(Camera camera, UnityAction<GameObject> setWorkObject)
     {
         _camera = camera;
         SetWorkObject = setWorkObject;
