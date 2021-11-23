@@ -10,19 +10,18 @@ namespace Painter
         private PaintMode _paintMode = PaintMode.Off;
         private Collider _paintableObject;
         private PaintInputController _inputController;
+        private PaintAllController _paintAllController;
         private DrawHandler _drawCircle = new DrawCircle();
-        private int _num = 0;
 
         public MainPainterController(Camera camera)
         {
             _camera = camera;
             _inputController = new PaintInputController(_camera);
+            _paintAllController = new PaintAllController();
         }
 
-        public Vector3 Points()
-        {
-            return _inputController.Points;
-        }
+        public Vector3 Points() => _inputController.Points;
+        public PaintMode PaintMode => _paintMode;
 
         public void Run(PaintMode paintMode)
         {
@@ -52,28 +51,25 @@ namespace Painter
             {
                 case PaintMode.Off:
                     _inputController.Run(0);
-                    _num = 0;
                     break;
 
                 case PaintMode.PaintAll:
-                    _num = 0;
+                    _paintAllController.Run(_color, _paintableObject);
                     break;
 
                 case PaintMode.PaintCircle:
                     _inputController.Run(1, _color, _size, _drawCircle);
-                    _num = 1;
                     break;
 
                 case PaintMode.PaintStencil:            //Не реализовано создание трафарета
                     _inputController.Run(2, _color, _size, _drawCircle);
-                    _num = 2;
                     break;
             }
         }
 
         public void Execute()
         {
-            if (_num != 0)
+            if (_paintMode == PaintMode.PaintCircle || _paintMode == PaintMode.PaintStencil)
             {
                 _inputController.Execute();
             }

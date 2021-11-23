@@ -24,7 +24,7 @@ public class StartPainter : MonoBehaviour
         _mainPainterController = new MainPainterController(_camera);
         _circleButton.onClick.AddListener(CircleButton);
         _stencilButton.onClick.AddListener(StencilButton);
-        //_paintAllButton.onClick.AddListener(PaintAllButton);
+        _paintAllButton.onClick.AddListener(PaintAllButton);
         _stopButton.onClick.AddListener(StopButton);
     }
 
@@ -44,7 +44,7 @@ public class StartPainter : MonoBehaviour
         _stencilButton.gameObject.SetActive(false);
         _paintAllButton.gameObject.SetActive(false);
         _stopButton.gameObject.SetActive(true);
-        _mainPainterController.Run(_color, PaintMode.PaintStencil, _paintableObject);
+        _mainPainterController.Run(_color, PaintMode.PaintAll, _paintableObject);
     }
 
     private void StencilButton()
