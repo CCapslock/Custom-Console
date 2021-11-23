@@ -5,6 +5,7 @@ namespace Painter
         Off,
         PaintAll,
         PaintCircle,
+        PaintLine,
         PaintStencil
     }
 }

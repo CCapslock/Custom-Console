@@ -12,6 +12,7 @@ namespace Painter
         private PaintInputController _inputController;
         private PaintAllController _paintAllController;
         private DrawHandler _drawCircle = new DrawCircle();
+        private DrawHandler _drawLine = new DrawLine();
 
         public MainPainterController(Camera camera)
         {
@@ -61,6 +62,10 @@ namespace Painter
                     _inputController.Run(1, _color, _size, _drawCircle);
                     break;
 
+                case PaintMode.PaintLine:
+                    _inputController.Run(1, _color, _size, _drawLine);
+                    break;
+
                 case PaintMode.PaintStencil:            //Не реализовано создание трафарета
                     _inputController.Run(2, _color, _size, _drawCircle);
                     break;
@@ -69,7 +74,7 @@ namespace Painter
 
         public void Execute()
         {
-            if (_paintMode == PaintMode.PaintCircle || _paintMode == PaintMode.PaintStencil)
+            if (_paintMode == PaintMode.PaintCircle || _paintMode == PaintMode.PaintStencil || _paintMode == PaintMode.PaintLine)
             {
                 _inputController.Execute();
             }

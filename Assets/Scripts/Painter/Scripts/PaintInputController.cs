@@ -7,7 +7,7 @@ namespace Painter
         private Camera _camera;
         private Color _color = Color.black;
         private int _size = 20;
-        private DrawHandler _drawCircle;
+        private DrawHandler _drawHandler;
         private bool BoolRaycast;
 
         private int _num = 0;
@@ -32,9 +32,9 @@ namespace Painter
             _num = Num;
         }
 
-        public void Run(int Num, Color color, int size, DrawHandler drawCircle)
+        public void Run(int Num, Color color, int size, DrawHandler drawHandler)
         {
-            _drawCircle = drawCircle;
+            _drawHandler = drawHandler;
             _num = Num;
             _color = color;
             _size = size;
@@ -131,7 +131,7 @@ namespace Painter
             {
                 for (int y = 0; y < _size; y++)
                 {
-                    if (_drawCircle.Check(x, y, _size))
+                    if (_drawHandler.Check(x, y, _size))
                     {
                         if (_textureStencil != null)
                         {

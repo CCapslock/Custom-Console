@@ -11,6 +11,7 @@ public class StartPainter : MonoBehaviour
     [SerializeField] private Button _circleButton;
     [SerializeField] private Button _stencilButton;
     [SerializeField] private Button _paintAllButton;
+    [SerializeField] private Button _lineButton;
     [SerializeField] private Button _stopButton;
     [SerializeField] private Color _color = Color.black;
     [SerializeField] private int _size = 20;
@@ -25,7 +26,19 @@ public class StartPainter : MonoBehaviour
         _circleButton.onClick.AddListener(CircleButton);
         _stencilButton.onClick.AddListener(StencilButton);
         _paintAllButton.onClick.AddListener(PaintAllButton);
+        _lineButton.onClick.AddListener(LineButton);
         _stopButton.onClick.AddListener(StopButton);
+    }
+
+    private void LineButton()
+    {
+        _stencil.SetActive(false);
+        _circleButton.gameObject.SetActive(false);
+        _stencilButton.gameObject.SetActive(false);
+        _paintAllButton.gameObject.SetActive(false);
+        _lineButton.gameObject.SetActive(false);
+        _stopButton.gameObject.SetActive(true);
+        _mainPainterController.Run(_color, _size, PaintMode.PaintLine);
     }
 
     private void StopButton()
@@ -33,6 +46,7 @@ public class StartPainter : MonoBehaviour
         _circleButton.gameObject.SetActive(true);
         _stencilButton.gameObject.SetActive(true);
         _paintAllButton.gameObject.SetActive(true);
+        _lineButton.gameObject.SetActive(true);
         _stopButton.gameObject.SetActive(false);
         _mainPainterController.Run(PaintMode.Off);
     }
@@ -43,6 +57,7 @@ public class StartPainter : MonoBehaviour
         _circleButton.gameObject.SetActive(false);
         _stencilButton.gameObject.SetActive(false);
         _paintAllButton.gameObject.SetActive(false);
+        _lineButton.gameObject.SetActive(false);
         _stopButton.gameObject.SetActive(true);
         _mainPainterController.Run(_color, PaintMode.PaintAll, _paintableObject);
     }
@@ -53,6 +68,7 @@ public class StartPainter : MonoBehaviour
         _circleButton.gameObject.SetActive(false);
         _stencilButton.gameObject.SetActive(false);
         _paintAllButton.gameObject.SetActive(false);
+        _lineButton.gameObject.SetActive(false);
         _stopButton.gameObject.SetActive(true);
         _mainPainterController.Run(_color, _size, PaintMode.PaintStencil);
     }
@@ -63,6 +79,7 @@ public class StartPainter : MonoBehaviour
         _circleButton.gameObject.SetActive(false);
         _stencilButton.gameObject.SetActive(false);
         _paintAllButton.gameObject.SetActive(false);
+        _lineButton.gameObject.SetActive(false);
         _stopButton.gameObject.SetActive(true);
         _mainPainterController.Run(_color, _size, PaintMode.PaintCircle);
     }
