@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Painter
@@ -9,6 +10,7 @@ namespace Painter
         private int _size = 20;
         private DrawHandler _drawHandler;
         private bool BoolRaycast;
+        private List<IObserver> _observers;
 
         private int _num = 0;
         private RaycastHit hit;
@@ -30,6 +32,16 @@ namespace Painter
         public void Run(int Num)
         {
             _num = Num;
+            if (_num == 0)
+            {
+                hits = null;
+                _textureStencil = null;
+                _textureObject = null;
+                stencilRayX = 0;
+                stencilRayY = 0;
+                objectRayX = 0;
+                objectRayY = 0;
+            }
         }
 
         public void Run(int Num, Color color, int size, DrawHandler drawHandler)
@@ -40,6 +52,26 @@ namespace Painter
             _size = size;
             hits = new RaycastHit[_num];
             if(_num == 0)
+            {
+                hits = null;
+                _textureStencil = null;
+                _textureObject = null;
+                stencilRayX = 0;
+                stencilRayY = 0;
+                objectRayX = 0;
+                objectRayY = 0;
+            }
+        }
+
+        public void Run(int Num, Color color, int size, DrawHandler drawHandler, List<IObserver> observers)
+        {
+            _drawHandler = drawHandler;
+            _num = Num;
+            _color = color;
+            _size = size;
+            _observers = observers;
+            hits = new RaycastHit[_num];
+            if (_num == 0)
             {
                 hits = null;
                 _textureStencil = null;
@@ -64,6 +96,8 @@ namespace Painter
                     BoolRaycast = Physics.Raycast(ray, out hit, 100f);
                     if (BoolRaycast)
                     {
+                        Observe();
+
                         if (_num > 1)
                         {
                             if (hit.collider.CompareTag("Stencil"))
@@ -121,6 +155,19 @@ namespace Painter
                     }
                 }
                 if (BoolRaycast) Draw();
+            }
+        }
+
+        private void Observe()
+        {
+            if (_observers != null)
+            {
+                Debug.Log(_observers.Count);
+                foreach (var observer in _observers)   //не работает, почему?
+                {
+                    Debug.Log("2");
+                    observer.ObserverUpdate(Points);
+                }
             }
         }
 
