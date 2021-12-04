@@ -34,7 +34,7 @@ namespace Painter
             ModeSelection();
         }
 
-        public void Run(Color color, PaintMode paintMode, Collider paintableObject)
+        public void Run(Color color, PaintMode paintMode, Collider paintableObject) //удалить?
         {
             _color = color;
             _paintMode = paintMode;
