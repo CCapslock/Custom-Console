@@ -1,3 +1,4 @@
+using ClearParticls;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,7 +16,7 @@ namespace Painter
         private DrawHandler _drawCircle = new DrawCircle();
         private DrawHandler _drawLine = new DrawLine();
         private List<IObserver> _observers = new List<IObserver>();
-        private IObserver _clearParticle = new ClearParticle();
+        private IObserver _clearParticle = new ClearParticleController();
 
         public MainPainterController(Camera camera)
         {

@@ -1,3 +1,4 @@
+using ClearParticls;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -162,10 +163,8 @@ namespace Painter
         {
             if (_observers != null)
             {
-                Debug.Log(_observers.Count);
-                foreach (var observer in _observers)   //не работает, почему?
+                foreach (var observer in _observers)
                 {
-                    Debug.Log("2");
                     observer.ObserverUpdate(Points);
                 }
             }

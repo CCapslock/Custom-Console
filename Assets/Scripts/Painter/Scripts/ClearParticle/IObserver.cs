@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Painter
+namespace ClearParticls
 {
     public interface IObserver
     {
