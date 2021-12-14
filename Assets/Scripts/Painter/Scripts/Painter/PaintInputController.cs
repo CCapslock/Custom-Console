@@ -97,7 +97,7 @@ namespace Painter
                     BoolRaycast = Physics.Raycast(ray, out hit, 100f);
                     if (BoolRaycast)
                     {
-                        Observe();
+                        if (_observers != null) Observe();
 
                         if (_num > 1)
                         {
@@ -161,12 +161,9 @@ namespace Painter
 
         private void Observe()
         {
-            if (_observers != null)
+            foreach (var observer in _observers)
             {
-                foreach (var observer in _observers)
-                {
-                    observer.ObserverUpdate(Points);
-                }
+                observer.ObserverUpdate(Points);
             }
         }
 

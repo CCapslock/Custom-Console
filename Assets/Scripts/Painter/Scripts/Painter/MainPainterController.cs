@@ -1,4 +1,5 @@
 using ClearParticls;
+using SprayParticls;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -17,6 +18,7 @@ namespace Painter
         private DrawHandler _drawLine = new DrawLine();
         private List<IObserver> _observers = new List<IObserver>();
         private IObserver _clearParticle = new ClearParticleController();
+        private IObserver _sprayParticle = new SprayParticleController();
 
         public MainPainterController(Camera camera)
         {
@@ -64,7 +66,8 @@ namespace Painter
                     break;
 
                 case PaintMode.PaintCircle:
-                    _inputController.Run(1, _color, _size, _drawCircle);
+                    _observers.Add(_sprayParticle);
+                    _inputController.Run(1, _color, _size, _drawCircle, _observers);
                     break;
 
                 case PaintMode.PaintLine:
@@ -73,7 +76,8 @@ namespace Painter
                     break;
 
                 case PaintMode.PaintStencil:            //Не реализовано создание трафарета
-                    _inputController.Run(2, _color, _size, _drawCircle);
+                    _observers.Add(_sprayParticle);
+                    _inputController.Run(2, _color, _size, _drawCircle, _observers);
                     break;
             }
         }
