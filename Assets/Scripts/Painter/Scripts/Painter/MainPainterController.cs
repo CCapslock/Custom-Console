@@ -66,8 +66,8 @@ namespace Painter
                     break;
 
                 case PaintMode.PaintCircle:
-                    _observers.Add(_sprayParticle);
-                    _inputController.Run(1, _color, _size, _drawCircle, _observers);
+                    //_observers.Add(_sprayParticle);
+                    _inputController.Run(1, _color, _size, _drawCircle);
                     break;
 
                 case PaintMode.PaintLine:
