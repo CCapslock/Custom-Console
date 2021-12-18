@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Painter
 {
-    public class MainPainterController
+    public class MainPainterController : IExecuter
     {
         private Camera _camera;
         private Color _color = Color.black;
