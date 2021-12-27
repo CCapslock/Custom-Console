@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9710809037cdf5418402c945d523bd0, type: 3}
+  m_Name: Chesee
+  m_EditorClassIdentifier: 
+  _Id: 1
+  _material: {fileID: 2100000, guid: 9d55220858cf9354fa5da1b0bd201e09, type: 2}
+  _type: 0
+  _sprite: {fileID: 21300000, guid: 4c4e485c156a5af488ce871e168f97d9, type: 3}

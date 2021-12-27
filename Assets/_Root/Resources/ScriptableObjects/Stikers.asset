@@ -13,4 +13,6 @@ MonoBehaviour:
   m_Name: Stikers
   m_EditorClassIdentifier: 
   _stikers:
-  - {fileID: 5723070112917572811, guid: 7d3fb5b4930f3544c9d7bb502d71da98, type: 3}
+  - {fileID: 11400000, guid: 950abecfe86d04449b58089b2ad3cebf, type: 2}
+  - {fileID: 11400000, guid: 6e37cafc235895540a572ea732896237, type: 2}
+  - {fileID: 11400000, guid: 90e50ca035ae85a4f819705e1ad5faa3, type: 2}

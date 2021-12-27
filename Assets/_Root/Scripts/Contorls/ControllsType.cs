@@ -1,0 +1,5 @@
+﻿enum ControllsType
+{
+    Rotation,
+    Movement
+}

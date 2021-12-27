@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c17ce5fe29ada8408791449e605e6ce, type: 3}
+  m_Name: Rainbow
+  m_EditorClassIdentifier: 
+  _material: {fileID: 2100000, guid: 108984e1e2289b64786d2f3cdb610205, type: 2}
+  _sprite: {fileID: 21300000, guid: fe7bf3295dc6f114985e93159bfb281c, type: 3}

@@ -37,13 +37,11 @@ class ToolMenuView : MonoBehaviour, IDisposable
         _stikerButton.onClick.AddListener(stiker);
         _stikerButton.gameObject.SetActive(true);
     }
-    public void ControllerPart(UnityAction brush, UnityAction stiker, UnityAction decoration)
+    public void ControllerPart(UnityAction brush, UnityAction decoration)
     {
         Clear();
         _brushButton.onClick.AddListener(brush);
         _brushButton.gameObject.SetActive(true);
-        _stikerButton.onClick.AddListener(stiker);
-        _stikerButton.gameObject.SetActive(true);
         _decorationButton.onClick.AddListener(decoration);
         _decorationButton.gameObject.SetActive(true);
     }

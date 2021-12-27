@@ -3,10 +3,11 @@
 [CreateAssetMenu(fileName = nameof(Stikers), menuName = "DataStore/" + nameof(Stikers), order = 0)]
 public sealed class Stikers : ScriptableObject
 {
-    [SerializeField] public GameObject[] _stikers;
+    [SerializeField] public Stiker[] _stikers;
 
-    public GameObject Get(int id)
+    public Stiker GetStiker(int id)
     {
         return _stikers[id];
     }
+    public int Lenght => _stikers.Length;
 }

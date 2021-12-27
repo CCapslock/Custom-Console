@@ -3,9 +3,9 @@ using UnityEngine.Events;
 
 public class PartSelector
 {
-    public bool Active;
+    public bool active;
     private Camera _camera;
-    private UnityAction<GameObject>  SetWorkObject;
+    private UnityAction<GameObject> SetWorkObject;
 
     public PartSelector(Camera camera, UnityAction<GameObject> setWorkObject)
     {
@@ -15,7 +15,7 @@ public class PartSelector
 
     public void Action()
     {
-        if (Active)
+        if (active)
         {
             if (Input.touchCount > 0)
             {
