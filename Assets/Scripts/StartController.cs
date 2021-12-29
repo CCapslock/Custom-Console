@@ -9,7 +9,6 @@ namespace CustomConsole
         [SerializeField] private Camera _camera;
 
         private GameProfile _gameProfile;
-        private List<IExecuter> _executers = new List<IExecuter>();
         private MainController _mainController;
         
         private void Awake()

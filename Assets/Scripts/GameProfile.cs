@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace CustomConsole
 {
-    public class GameProfile : MonoBehaviour
+    public class GameProfile
     {
         private List<IExecuter> _executers = new List<IExecuter>();
 
