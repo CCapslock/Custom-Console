@@ -4,9 +4,10 @@ using UnityEngine;
 
 namespace CustomConsole
 {
-    public class GameProfile
+    internal class GameProfile
     {
         private List<IExecuter> _executers = new List<IExecuter>();
+        public SubscriptionProperty<GameMode> CurrentState { get; }
 
         public List<IExecuter> Executers
         {
@@ -18,6 +19,11 @@ namespace CustomConsole
             {
                 _executers = value;
             }
+        }
+
+        public GameProfile()
+        {
+            CurrentState = new SubscriptionProperty<GameMode>();
         }
     }
 }

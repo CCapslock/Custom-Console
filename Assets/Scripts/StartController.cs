@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,7 +6,6 @@ namespace CustomConsole
     public class StartController : MonoBehaviour
     {
         [SerializeField] private Camera _camera;
-        [SerializeField] private Button _start;
         [SerializeField] private GameObject _followObj;
 
         private GameProfile _gameProfile;
@@ -18,14 +14,8 @@ namespace CustomConsole
         private void Awake()
         {
             _gameProfile = new GameProfile();
-            _mainController = new MainController(_gameProfile, _camera);
-            _start.onClick.AddListener(StartGame);
-        }
-
-        private void StartGame()
-        {
-            _start.gameObject.SetActive(false);
-            _followObj.SetActive(true);
+            _mainController = new MainController(_gameProfile, _camera, _followObj);
+            _gameProfile.CurrentState.Value = GameMode.MenuMode;
         }
 
         private void Update()

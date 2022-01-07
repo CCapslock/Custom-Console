@@ -6,35 +6,31 @@ using UnityEngine;
 
 namespace CustomConsole
 {
-    public class MainController
+    internal class MainController
     {
-        private GameMode _gameMode = GameMode.MenuMode;
         private GameProfile _gameProfile;
-        //private IExecuter _mainPainterController;
+        private MenuController _menuController;
         private Camera _camera;
+        private GameObject _followObj;
 
-        public MainController (GameProfile gameProfile, Camera camera)
+        public MainController (GameProfile gameProfile, Camera camera, GameObject followObj)
         {
+            _followObj = followObj;
             _camera = camera;
             _gameProfile = gameProfile;
-            //_mainPainterController = new MainPainterController(_camera);
-            //_gameProfile.Executers.Add(_mainPainterController);
+            _gameProfile.CurrentState.SubscribeOnChange(ModeSelection);
         }
 
-        public void Run(GameMode gameMode)
+        private void ModeSelection(GameMode state)
         {
-            _gameMode = gameMode;
-            ModeSelection();
-        }
-
-        private void ModeSelection()
-        {
-            switch (_gameMode)
+            switch (state)
             {
                 case GameMode.MenuMode:
+                    _menuController = new MenuController(_gameProfile, _followObj);
                     break;
 
                 case GameMode.SelectionMode:
+                    Debug.Log("SelectionMode Activated");
                     break;
 
                 case GameMode.PaintMode:
