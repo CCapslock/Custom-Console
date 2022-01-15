@@ -1,13 +1,11 @@
 ﻿using UnityEngine;
 
-class FreeMode :MonoBehaviour
+public class FreeMode : IExecuter
 {
-    //потом передавать все данные в конструкторе и убрать MonoBehaviour
-    [SerializeField] private Camera _camera;
-    [SerializeField] private Transform _canvas;
-    [SerializeField] private Transform _console;
-    [SerializeField] private Transform _workPlace;
-    [SerializeField] private Transform _offScreen;
+    private Transform _console;
+    private Transform _canvas;
+    private Transform _workPlace;
+    private Transform _offScreen;
 
     private FreeModeView _freeModeView;
 
@@ -17,12 +15,17 @@ class FreeMode :MonoBehaviour
 
     private GameObject _part;
 
-    private void Awake()
+    public FreeMode(Camera camera, Transform canvas, Transform console, Transform workPlace, Transform offScreen)
     {
+        _console = console;
+        _workPlace = workPlace;
+        _offScreen = offScreen;
+        _canvas = canvas;
         CreateView();
         _objectControlls = new ObjectControlls(_workPlace);
-        _partSelector = new PartSelector(_camera, SetWorkObject);
-        _toolMenu = new ToolMenu(_objectControlls, _camera, _canvas, BackToConsole);
+        //консоль должна подниматься в рабочее положение
+        _partSelector = new PartSelector(camera, SetWorkObject);
+        _toolMenu = new ToolMenu(_objectControlls, camera, canvas, BackToConsole);
         _partSelector.active = true;              
     }
 
@@ -33,7 +36,7 @@ class FreeMode :MonoBehaviour
         _freeModeView.Init(null); //поменять когда будет меню игры  
     }
 
-    private void Update()
+    public void Execute()
     {
         _partSelector.Action();
         _objectControlls.Action();
@@ -43,7 +46,7 @@ class FreeMode :MonoBehaviour
 
     private void SetWorkObject(GameObject part)
     {
-        Destroy(_freeModeView.gameObject);
+        Object.Destroy(_freeModeView.gameObject);
         _console.parent = _offScreen;
         _console.localPosition = Vector3.zero;
         _console.rotation = Quaternion.identity;
