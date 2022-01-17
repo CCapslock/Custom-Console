@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace CustomConsole
@@ -9,6 +7,7 @@ namespace CustomConsole
         private string _viewPath = "Prefabs/Menu";
         private GameProfile _gameProfile;
         private MenuView _menuView;
+        private GameObject _objectView;
 
         public MenuController(GameProfile gameProfile, GameObject followObj)
         {
@@ -25,10 +24,14 @@ namespace CustomConsole
 
         private MenuView LoadView()
         {
-            GameObject objectView = Object.Instantiate(Resources.Load<GameObject>(_viewPath));
-            return objectView.GetComponent<MenuView>();
+            _objectView = Object.Instantiate(Resources.Load<GameObject>(_viewPath));
+            return _objectView.GetComponent<MenuView>();
         }
 
+        public void Dispose()
+        {
+            Object.Destroy(_objectView);
+        }
     }
 }
 

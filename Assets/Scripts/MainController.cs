@@ -10,6 +10,7 @@ namespace CustomConsole
     {
         private GameProfile _gameProfile;
         private MenuController _menuController;
+        private SelectionController _selectionController;
         private Camera _camera;
         private GameObject _followObj;
 
@@ -30,10 +31,14 @@ namespace CustomConsole
                     break;
 
                 case GameMode.SelectionMode:
+                    _selectionController = new SelectionController(_gameProfile);
+                    _menuController.Dispose();
                     Debug.Log("SelectionMode Activated");
                     break;
 
                 case GameMode.PaintMode:
+                    _selectionController.Dispose();
+                    Debug.Log("PaintMode Activated");
                     break;
             }
         }
