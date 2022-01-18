@@ -11,13 +11,12 @@ namespace CustomConsole
 
         public SelectionController(GameProfile gameProfile)
         {
-            GameObject followObj = null;   //позже изменить
             _gameProfile = gameProfile;
             _menuView = LoadView();
-            _menuView.Init(StartGame, followObj);
+            _menuView.Init(StartSpray);
         }
 
-        private void StartGame()
+        private void StartSpray()
         {
             _menuView.ClickButton();
             _gameProfile.CurrentState.Value = GameMode.PaintMode;

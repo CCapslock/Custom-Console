@@ -12,22 +12,21 @@ namespace CustomConsole
         [SerializeField] private Button _buyButton;
         [SerializeField] private Button _settingsCloseButton;
         [SerializeField] private Button _buyCloseButton;
+        [SerializeField] private Button _sprayButton;
         [SerializeField] private GameObject _objMenu;
         [SerializeField] private GameObject _settingsMenu;
         [SerializeField] private GameObject _buyMenu;
         [SerializeField] private GameObject _paintMenu;
 
-        private GameObject _followObj;
-
-        public void Init(UnityAction startGame, GameObject followObj)
+        public void Init(UnityAction startSpray)
         {
-            _followObj = followObj;
             //_buttonStart.onClick.AddListener(startGame);
             _buttonStart.onClick.AddListener(SelecMode);
             _settingsButton.onClick.AddListener(SettingsNenu);
             _buyButton.onClick.AddListener(BuyMenu);
             _settingsCloseButton.onClick.AddListener(CloseButton);
             _buyCloseButton.onClick.AddListener(CloseButton);
+            _sprayButton.onClick.AddListener(startSpray);
         }
 
         private void SelecMode()
@@ -55,7 +54,6 @@ namespace CustomConsole
         public void ClickButton()
         {
             _objMenu.SetActive(false);
-            //_followObj.SetActive(true);
         }
 
         protected void OnDestroy()
