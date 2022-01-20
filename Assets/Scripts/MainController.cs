@@ -1,4 +1,5 @@
 //using Painter;
+using Painter;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -11,7 +12,8 @@ namespace CustomConsole
         private GameProfile _gameProfile;
         private MenuController _menuController;
         private SelectionController _selectionController;
-        private PaintController _paintController;
+        private PaintMenuController _paintController;
+        private MainPainterController _mainPainterController;
         private Camera _camera;
         private GameObject _followObj;
 
@@ -21,6 +23,8 @@ namespace CustomConsole
             _camera = camera;
             _gameProfile = gameProfile;
             _gameProfile.CurrentState.SubscribeOnChange(ModeSelection);
+            _mainPainterController = new MainPainterController(_camera, _gameProfile);
+            _gameProfile.Executers.Add(_mainPainterController);
         }
 
         private void ModeSelection(GameMode state)
@@ -41,7 +45,8 @@ namespace CustomConsole
                     break;
 
                 case GameMode.PaintMode:
-                    _paintController = new PaintController();
+                    _paintController = new PaintMenuController(_gameProfile);
+                    _mainPainterController.Run(50, PaintMode.PaintCircle);
                     _menuController?.Dispose();
                     _selectionController.Dispose();
                     Debug.Log("PaintMode Activated");
