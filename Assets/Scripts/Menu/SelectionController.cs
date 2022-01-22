@@ -7,13 +7,15 @@ namespace CustomConsole
         private string _viewPath = "Prefabs/SelectionMenu";
         private GameProfile _gameProfile;
         private SelectionMenuView _menuView;
+        private NintendoSwitchView _nintendoSwitchView;
         private GameObject _objectView;
 
-        public SelectionController(GameProfile gameProfile)
+        public SelectionController(GameProfile gameProfile, NintendoSwitchView nintendoSwitchView)
         {
+            _nintendoSwitchView = nintendoSwitchView;
             _gameProfile = gameProfile;
             _menuView = LoadView();
-            _menuView.Init(StartSpray);
+            _menuView.Init(StartSpray, _nintendoSwitchView);
         }
 
         private void StartSpray()

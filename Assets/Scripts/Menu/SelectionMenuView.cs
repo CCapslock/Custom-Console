@@ -14,20 +14,37 @@ namespace CustomConsole
         [SerializeField] private GameObject _objMenu;
         [SerializeField] private GameObject _settingsMenu;
         [SerializeField] private GameObject _paintMenu;
+        [SerializeField] private GameObject _selectionObjMenu;
+        [SerializeField] private SelectionMenuGrid _selectionMenuGrid;
 
-        public void Init(UnityAction startSpray)
+        private NintendoSwitchView _nintendoSwitchView;
+
+        public void Init(UnityAction startSpray, NintendoSwitchView nintendoSwitchView)
         {
+            _nintendoSwitchView = nintendoSwitchView;
             //_buttonStart.onClick.AddListener(startGame);
             _buttonStart.onClick.AddListener(SelecMode);
             _settingsButton.onClick.AddListener(SettingsNenu);
             _settingsCloseButton.onClick.AddListener(CloseButton);
             _sprayButton.onClick.AddListener(startSpray);
+            InsertIcons();
+        }
+
+        private void InsertIcons()
+        {
+            for(int i = 0; i < _nintendoSwitchView.ObjImg.Count; i++)
+            {
+                _selectionMenuGrid.ImgObj[i].gameObject.SetActive(true);
+                _selectionMenuGrid.ImgObj[i].sprite = _nintendoSwitchView.ObjImg[i];
+            }
+
         }
 
         private void SelecMode()
         {
             _buttonStart.gameObject.SetActive(false);
-            _paintMenu.SetActive(true);
+            _selectionObjMenu.SetActive(true);
+            //_paintMenu.SetActive(true);
         }
 
         private void CloseButton()
