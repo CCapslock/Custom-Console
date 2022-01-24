@@ -28,7 +28,7 @@ class DecorationController : IToolController
         }        
     }
 
-    public void Action()
+    public void Execute()
     {
         if ((Input.touchCount > 0) && (_chosenDecPart == null))
         {

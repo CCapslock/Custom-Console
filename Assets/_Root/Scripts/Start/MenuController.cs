@@ -6,9 +6,10 @@ namespace CustomConsole
 {
     internal class MenuController
     {
-        private string _viewPath = "UI/StartMenuView";
+        private string _viewPath = "Prefabs/Menu";
         private GameProfile _gameProfile;
         private MenuView _menuView;
+        private GameObject _objectView;
 
         public MenuController(GameProfile gameProfile, GameObject followObj)
         {
@@ -25,10 +26,13 @@ namespace CustomConsole
 
         private MenuView LoadView()
         {
-            GameObject objectView = Object.Instantiate(Resources.Load<GameObject>(_viewPath));
-            return objectView.GetComponent<MenuView>();
+            _objectView = Object.Instantiate(Resources.Load<GameObject>(_viewPath));
+            return _objectView.GetComponent<MenuView>();
         }
-
+        public void Dispose()
+        {
+            Object.Destroy(_objectView);
+        }
     }
 }
 

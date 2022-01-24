@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using CustomConsole;
+using UnityEngine;
 
 public class FreeMode : IExecuter
 {
@@ -15,7 +16,7 @@ public class FreeMode : IExecuter
 
     private GameObject _part;
 
-    public FreeMode(Camera camera, Transform canvas, Transform console, Transform workPlace, Transform offScreen)
+    public FreeMode(GameProfile gameProfile,Camera camera, Transform canvas, Transform console, Transform workPlace, Transform offScreen)
     {
         _console = console;
         _workPlace = workPlace;
@@ -25,7 +26,7 @@ public class FreeMode : IExecuter
         _objectControlls = new ObjectControlls(_workPlace);
         //консоль должна подниматься в рабочее положение
         _partSelector = new PartSelector(camera, SetWorkObject);
-        _toolMenu = new ToolMenu(_objectControlls, camera, canvas, BackToConsole);
+        _toolMenu = new ToolMenu(gameProfile,_objectControlls, camera, canvas, BackToConsole);
         _partSelector.active = true;              
     }
 

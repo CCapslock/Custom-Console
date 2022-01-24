@@ -2,6 +2,8 @@
 using UnityEngine;
 using UnityEngine.Events;
 using Object = UnityEngine.Object;
+using Painter;
+using CustomConsole;
 
 class ToolMenu
 {
@@ -12,9 +14,12 @@ class ToolMenu
     readonly Camera _camera;
     IPart _part;
     ObjectControlls _objectControlls;
+    GameProfile _gameProfile;
+    PaintMenuController _paintController;
 
-    public ToolMenu(ObjectControlls objectControlls, Camera camera, Transform canvas, UnityAction backToConsole)
+    public ToolMenu(GameProfile gameProfile, ObjectControlls objectControlls, Camera camera, Transform canvas, UnityAction backToConsole)
     {
+        _gameProfile = gameProfile;
         _objectControlls = objectControlls;
         _camera = camera;
         _canvas = canvas;
@@ -22,7 +27,7 @@ class ToolMenu
     }
     public void Action()
     {
-        if (_toolController != null) _toolController.Action();
+        if (_toolController != null) _toolController.Execute();
     }
 
     public void Fill(IPart part)
@@ -54,12 +59,16 @@ class ToolMenu
     public void SetBrushTool()
     {
         Clear();
-        _toolController = null;
+        _paintController = new PaintMenuController(_gameProfile);
+        MainPainterController paint = new MainPainterController(_camera, PaintMode.PaintCircle);
+        paint.Run(50, PaintMode.PaintCircle);
+        _toolController = paint;
     }
     public void SetSprayTool()
     {
         Clear();
-        _toolController = null;
+        //выбор графити
+        _toolController = new MainPainterController(_camera, PaintMode.PaintStencil);
     }
     public void SetStikerTool()
     {
@@ -79,6 +88,7 @@ class ToolMenu
         _objectControlls.SetRotation();
         _objectControlls.ReturnControllToOriginal();
         _objectControlls.ClearRotation();
+        _paintController = null;
         if (_view != null) Object.Destroy(_view.gameObject);
         if (_toolController != null)
         {

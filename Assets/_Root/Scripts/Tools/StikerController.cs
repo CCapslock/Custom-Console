@@ -40,7 +40,7 @@ class StikerController : IToolController
     {
         _stikerTransform.rotation = Quaternion.Euler(0,0,angle);
     }
-    public void Action() 
+    public void Execute() 
     {
 
     }

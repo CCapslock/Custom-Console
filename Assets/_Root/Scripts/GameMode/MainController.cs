@@ -8,6 +8,8 @@ namespace CustomConsole
 {
     internal class MainController
     {
+        private string _viewPath = "Prefabs/NintendoSwitch";
+        private NintendoSwitchView _nintendoSwitchView;
         private GameProfile _gameProfile;
 
         private MenuController _menuController;
@@ -40,18 +42,23 @@ namespace CustomConsole
             {
                 case GameMode.MenuMode:
                     _menuController = new MenuController(_gameProfile, _followObj);
+                    //_freeMode?.Dispose();
+                    //_levelMode?.Dispose();
                     break;
 
                 case GameMode.FreeMode:
-                    _freeMode = new FreeMode(_camera, _canvas, _console, _workPlace, _offScreen);
+                    _freeMode = new FreeMode(_gameProfile,_camera, _canvas, _console, _workPlace, _offScreen);
                     _gameProfile.AddExecuter(_freeMode);
+                    _menuController?.Dispose();
+                    //_levelMode?.Dispose();
                     break;
 
                 case GameMode.LevelMode:
                     _levelMode = new LevelMode(); //заполнить позже
+                    _menuController?.Dispose();
+                    //_freeMode?.Dispose();
                     break;
             }
-            //чистить при запуске
         }
     }
 }
