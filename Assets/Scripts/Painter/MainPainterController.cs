@@ -1,6 +1,6 @@
 using ClearParticls;
 using CustomConsole;
-using SprayParticls;
+using Spray;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -21,6 +21,7 @@ namespace Painter
         private List<IObserver> _observers = new List<IObserver>();
         private IObserver _clearParticle = new ClearParticleController();
         private IObserver _sprayParticle = new SprayParticleController();
+        private IObserver _soundSpray = new SoundSprayController();
 
         public MainPainterController(Camera camera, GameProfile gameProfile)
         {
@@ -54,9 +55,9 @@ namespace Painter
                     break;
 
                 case PaintMode.PaintCircle:
-                    Debug.Log("1");
-                    //_observers.Add(_sprayParticle);
-                    _inputController.Run(1, _gameProfile, _size, _drawCircle);
+                    _observers.Add(_sprayParticle);
+                    _observers.Add(_soundSpray);
+                    _inputController.Run(1, _gameProfile, _size, _drawCircle, _observers);
                     break;
 
                 case PaintMode.PaintLine:

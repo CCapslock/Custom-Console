@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace SprayParticls
+namespace Spray
 {
     public class SprayParticleController : IObserver
     {
