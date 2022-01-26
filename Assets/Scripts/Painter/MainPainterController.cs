@@ -55,7 +55,7 @@ namespace Painter
                     break;
 
                 case PaintMode.PaintCircle:
-                    _observers.Add(_sprayParticle);
+                    //_observers.Add(_sprayParticle);
                     _observers.Add(_soundSpray);
                     _inputController.Run(1, _gameProfile, _size, _drawCircle, _observers);
                     break;

@@ -1,11 +1,12 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
 namespace CustomConsole
 {
-    public class SelectionMenuView : MonoBehaviour
+    public class SelectionMenuModel : MonoBehaviour
     {
         [SerializeField] private Button _buttonStart;
         [SerializeField] private Button _settingsButton;
@@ -36,8 +37,21 @@ namespace CustomConsole
             {
                 _selectionMenuGrid.ImgObj[i].gameObject.SetActive(true);
                 _selectionMenuGrid.ImgObj[i].sprite = _nintendoSwitchView.ObjImg[i];
+                var nintendoSwitchViewObj = _nintendoSwitchView.Obj[i];
+                _selectionMenuGrid.BtnObj[i].onClick.AddListener(delegate { SelectionMenuGrid((GameObject)nintendoSwitchViewObj, (List<GameObject>)_nintendoSwitchView.Obj); });
+                //Debug.Log(_nintendoSwitchView.Obj[i].name);
             }
+        }
 
+        private void SelectionMenuGrid(GameObject obj, List<GameObject> objs)
+        {
+            foreach(GameObject obj1 in objs)
+            {
+                obj1.SetActive(false);
+            }
+            obj.SetActive(true);
+            _selectionObjMenu.SetActive(false);
+            _paintMenu.SetActive(true);
         }
 
         private void SelecMode()

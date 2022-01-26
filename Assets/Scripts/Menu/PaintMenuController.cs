@@ -7,7 +7,7 @@ namespace CustomConsole
     {
         private string _viewPath = "Prefabs/PaintMenu";
         private GameProfile _gameProfile;
-        private PaintMenuView _menuView;
+        private PaintMenuModel _menuView;
         private GameObject _objectView;
 
         public PaintMenuController(GameProfile gameProfile)
@@ -47,10 +47,10 @@ namespace CustomConsole
             _gameProfile.Color = new Color(1, 1, 1, 1);
         }
 
-        private PaintMenuView LoadView()
+        private PaintMenuModel LoadView()
         {
             _objectView = Object.Instantiate(Resources.Load<GameObject>(_viewPath));
-            return _objectView.GetComponent<PaintMenuView>();
+            return _objectView.GetComponent<PaintMenuModel>();
         }
 
         public void Dispose()

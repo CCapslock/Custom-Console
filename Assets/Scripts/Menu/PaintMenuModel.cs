@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 namespace CustomConsole
 {
-    public class PaintMenuView : MonoBehaviour
+    public class PaintMenuModel : MonoBehaviour
     {
         [SerializeField] private Button _settingsButton;
         [SerializeField] private Button _whiteButton;

@@ -6,7 +6,7 @@ namespace CustomConsole
     {
         private string _viewPath = "Prefabs/SelectionMenu";
         private GameProfile _gameProfile;
-        private SelectionMenuView _menuView;
+        private SelectionMenuModel _menuView;
         private NintendoSwitchView _nintendoSwitchView;
         private GameObject _objectView;
 
@@ -24,10 +24,10 @@ namespace CustomConsole
             _gameProfile.CurrentState.Value = GameMode.PaintMode;
         }
 
-        private SelectionMenuView LoadView()
+        private SelectionMenuModel LoadView()
         {
             _objectView = Object.Instantiate(Resources.Load<GameObject>(_viewPath));
-            return _objectView.GetComponent<SelectionMenuView>();
+            return _objectView.GetComponent<SelectionMenuModel>();
         }
 
         public void Dispose()

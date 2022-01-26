@@ -8,10 +8,9 @@ namespace CustomConsole
     public class SelectionMenuGrid : MonoBehaviour
     {
         [SerializeField] private List<Image> _imgObj;
+        [SerializeField] private List<Button> _btnObj;
 
-        public List<Image> ImgObj
-        {
-            get => _imgObj;
-        }
+        public List<Image> ImgObj => _imgObj;
+        public List<Button> BtnObj => _btnObj;
     }
 }
