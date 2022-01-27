@@ -12,6 +12,7 @@ namespace CustomConsole
         [SerializeField] private Button _settingsButton;
         [SerializeField] private Button _settingsCloseButton;
         [SerializeField] private Button _sprayButton;
+        [SerializeField] private Button _closeButton;
         [SerializeField] private GameObject _objMenu;
         [SerializeField] private GameObject _settingsMenu;
         [SerializeField] private GameObject _paintMenu;
@@ -28,7 +29,14 @@ namespace CustomConsole
             _settingsButton.onClick.AddListener(SettingsNenu);
             _settingsCloseButton.onClick.AddListener(CloseButton);
             _sprayButton.onClick.AddListener(startSpray);
+            _closeButton.onClick.AddListener(CloseMenu);
             InsertIcons();
+        }
+
+        private void CloseMenu()
+        {
+            _buttonStart.gameObject.SetActive(true);
+            _selectionObjMenu.SetActive(false);
         }
 
         private void InsertIcons()
@@ -37,15 +45,15 @@ namespace CustomConsole
             {
                 _selectionMenuGrid.ImgObj[i].gameObject.SetActive(true);
                 _selectionMenuGrid.ImgObj[i].sprite = _nintendoSwitchView.ObjImg[i];
-                var nintendoSwitchViewObj = _nintendoSwitchView.Obj[i];
-                _selectionMenuGrid.BtnObj[i].onClick.AddListener(delegate { SelectionMenuGrid((GameObject)nintendoSwitchViewObj, (List<GameObject>)_nintendoSwitchView.Obj); });
+                var nintendoSwitchViewObjEdit = _nintendoSwitchView.ObjEdit[i];
+                _selectionMenuGrid.BtnObj[i].onClick.AddListener(delegate { SelectionMenuGrid((GameObject)nintendoSwitchViewObjEdit); });
                 //Debug.Log(_nintendoSwitchView.Obj[i].name);
             }
         }
 
-        private void SelectionMenuGrid(GameObject obj, List<GameObject> objs)
+        private void SelectionMenuGrid(GameObject obj)
         {
-            foreach(GameObject obj1 in objs)
+            foreach(GameObject obj1 in _nintendoSwitchView.Obj)
             {
                 obj1.SetActive(false);
             }

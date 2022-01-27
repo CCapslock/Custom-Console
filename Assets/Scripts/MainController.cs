@@ -45,21 +45,21 @@ namespace CustomConsole
                     _menuController = new MenuController(_gameProfile, _followObj);
                     _selectionController?.Dispose();
                     _paintController?.Dispose();
+                    _mainPainterController.Run(50, PaintMode.Off);
                     break;
 
                 case GameMode.SelectionMode:
                     _selectionController = new SelectionController(_gameProfile, _nintendoSwitchView);
                     _menuController?.Dispose();
                     _paintController?.Dispose();
-                    Debug.Log("SelectionMode Activated");
+                    _mainPainterController.Run(50, PaintMode.Off);
                     break;
 
                 case GameMode.PaintMode:
-                    _paintController = new PaintMenuController(_gameProfile);
+                    _paintController = new PaintMenuController(_gameProfile, _nintendoSwitchView);
                     _mainPainterController.Run(50, PaintMode.PaintCircle);
                     _menuController?.Dispose();
                     _selectionController.Dispose();
-                    Debug.Log("PaintMode Activated");
                     break;
             }
         }

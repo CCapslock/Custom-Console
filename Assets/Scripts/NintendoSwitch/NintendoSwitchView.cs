@@ -8,16 +8,12 @@ namespace CustomConsole
     {
         [SerializeField] List<GameObject> _obj;
 
+        [SerializeField] List<GameObject> _objEdit;
+
         [SerializeField] private List<Sprite> _objImg;
 
-        public List<GameObject> Obj
-        {
-            get => _obj;
-        }
-
-        public List<Sprite> ObjImg
-        {
-            get => _objImg;
-        }
+        public List<GameObject> Obj => _obj;
+        public List<GameObject> ObjEdit => _objEdit;
+        public List<Sprite> ObjImg => _objImg;
     }
 }

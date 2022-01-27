@@ -326,6 +326,7 @@ MonoBehaviour:
   _settingsButton: {fileID: 3637553185784577920}
   _settingsCloseButton: {fileID: 3197549379099605324}
   _sprayButton: {fileID: 242686303814282001}
+  _closeButton: {fileID: 6449531067484068719}
   _objMenu: {fileID: 4408328244075779708}
   _settingsMenu: {fileID: 8484746234131253034}
   _paintMenu: {fileID: 3035104546890515689}

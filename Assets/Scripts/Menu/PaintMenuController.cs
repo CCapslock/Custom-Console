@@ -5,16 +5,24 @@ namespace CustomConsole
 {
     internal class PaintMenuController
     {
+        private NintendoSwitchView _nintendoSwitchView;
         private string _viewPath = "Prefabs/PaintMenu";
         private GameProfile _gameProfile;
         private PaintMenuModel _menuView;
         private GameObject _objectView;
 
-        public PaintMenuController(GameProfile gameProfile)
+        public PaintMenuController(GameProfile gameProfile, NintendoSwitchView nintendoSwitchView)
         {
+            _nintendoSwitchView = nintendoSwitchView;
             _gameProfile = gameProfile;
             _menuView = LoadView();
-            _menuView.Init(ColorWhite, ColorYelow, ColorGreen, ColorRed, ColorBlue, ColorBlack);
+            _menuView.Init(FinishGame, ColorWhite, ColorYelow, ColorGreen, ColorRed, ColorBlue, ColorBlack, nintendoSwitchView);
+        }
+
+        private void FinishGame()
+        {
+            _menuView.FinishButton();
+            _gameProfile.CurrentState.Value = GameMode.SelectionMode;
         }
 
         private void ColorBlack()
