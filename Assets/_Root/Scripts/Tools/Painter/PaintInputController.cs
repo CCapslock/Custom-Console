@@ -7,8 +7,9 @@ namespace Painter
 {
     public class PaintInputController
     {
+        public bool _active = true;
         private Camera _camera;
-        private Color _color = Color.black;
+        //private Color _color = Color.black;
         private int _size = 20;
         private DrawHandler _drawHandler;
         private bool BoolRaycast;
@@ -88,7 +89,7 @@ namespace Painter
 
         public void Execute()
         {
-            if (Input.GetMouseButton(0))
+            if ((Input.GetMouseButton(0))&&(_active))
             {
                 Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
 
@@ -182,16 +183,17 @@ namespace Painter
                         {
                             if (_textureStencil.GetPixel(stencilRayX + x - _size / 2, stencilRayY + y - _size / 2).a != 0)
                             {
-                                _textureStencil.SetPixel(stencilRayX + x - _size / 2, stencilRayY + y - _size / 2, _color);
+                                _textureStencil.SetPixel(stencilRayX + x - _size / 2, stencilRayY + y - _size / 2, _gameProfile.Color);
                             }
                             else
                             {
-                                _textureObject.SetPixel(objectRayX + x - _size / 2, objectRayY + y - _size / 2, _color);
+                                _textureObject.SetPixel(objectRayX + x - _size / 2, objectRayY + y - _size / 2, _gameProfile.Color);
                             }
                         }
                         else
                         {
-                            _textureObject.SetPixel(objectRayX + x - _size / 2, objectRayY + y - _size / 2, _color);
+                            _textureObject.SetPixel(objectRayX + x - _size / 2, objectRayY + y - _size / 2, _gameProfile.Color);
+
                         }
                     }
                 }

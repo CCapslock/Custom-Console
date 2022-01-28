@@ -20,7 +20,7 @@ class StikerController : IToolController
         {
             StikerCoordinates coordinates = Resources.Load<StikerCoordinates>("ScriptableObjects/StikerCoordinates");
             GameObject stiker = Object.Instantiate(Resources.Load<GameObject>("StikerParent"), hit.transform);
-            stiker.transform.position = new Vector3(hit.point.x, hit.point.y, hit.point.z-0.01f);
+            stiker.transform.position = new Vector3(hit.point.x + 0.01f, hit.point.y, hit.point.z);
             objectControlls.SetObject(stiker.transform);
             objectControlls.SetMovement(coordinates.GetX, coordinates.GetY);
             _stikerRender = stiker.transform.GetChild(0).GetComponent<MeshRenderer>();
@@ -38,7 +38,7 @@ class StikerController : IToolController
     }
     public void RotationUpdate(float angle)
     {
-        _stikerTransform.rotation = Quaternion.Euler(0,0,angle);
+        _stikerTransform.rotation = Quaternion.Euler(0, 90, angle);
     }
     public void Execute() 
     {

@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d29f0404b7c7ac9448fc2fbcea3825a7, type: 3}
   m_Name: StikerCoordinates
   m_EditorClassIdentifier: 
-  _xValueMovement: {x: -0.18, y: 0.18}
-  _yValueMovement: {x: -0.14, y: 0.14}
+  _xValueMovement: {x: -0.035, y: 0.035}
+  _yValueMovement: {x: -0.026, y: 0.026}

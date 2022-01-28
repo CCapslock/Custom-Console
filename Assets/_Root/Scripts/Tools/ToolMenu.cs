@@ -58,17 +58,16 @@ class ToolMenu
     }
     public void SetBrushTool()
     {
-        Clear();
-        _paintController = new PaintMenuController(_gameProfile);
-        MainPainterController paint = new MainPainterController(_camera, PaintMode.PaintCircle);
+        Clear(); MainPainterController paint = new MainPainterController(_gameProfile, _camera, PaintMode.PaintCircle);
         paint.Run(50, PaintMode.PaintCircle);
+        _paintController = new PaintMenuController(Refill,paint.Active,_objectControlls,_gameProfile);        
         _toolController = paint;
     }
     public void SetSprayTool()
     {
         Clear();
         //выбор графити
-        _toolController = new MainPainterController(_camera, PaintMode.PaintStencil);
+        _toolController = new MainPainterController( _gameProfile, _camera, PaintMode.PaintStencil);
     }
     public void SetStikerTool()
     {

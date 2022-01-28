@@ -16,11 +16,15 @@ namespace CustomConsole
         [SerializeField] private Button _redButton;
         [SerializeField] private Button _blueButton;
         [SerializeField] private Button _blackButton;
+        [SerializeField] private Button _moveOrPaintButton;
+        [SerializeField] private Button _backButton;
         [SerializeField] private GameObject _settingsMenu;
 
-        public void Init(UnityAction ColorWhite, UnityAction ColorYelow, UnityAction ColorGreen, UnityAction ColorRed, UnityAction ColorBlue, UnityAction ColorBlack)
+        public void Init(UnityAction Dispose,UnityAction MoveOrPaint, UnityAction ColorWhite, UnityAction ColorYelow, UnityAction ColorGreen, UnityAction ColorRed, UnityAction ColorBlue, UnityAction ColorBlack)
         {
             _settingsButton.onClick.AddListener(SettingsNenu);
+            _backButton.onClick.AddListener(Dispose);
+            _moveOrPaintButton.onClick.AddListener(MoveOrPaint);
             _whiteButton.onClick.AddListener(ColorWhite);
             _yelowButton.onClick.AddListener(ColorYelow);
             _greenButton.onClick.AddListener(ColorGreen);

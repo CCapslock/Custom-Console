@@ -22,20 +22,25 @@ namespace Painter
         private IObserver _clearParticle = new ClearParticleController();
         private IObserver _sprayParticle = new SprayParticleController();
 
+        public void Active(bool active)
+        {
+             _inputController._active = active;
+        }
+
         public MainPainterController(Camera camera, GameProfile gameProfile)
         {
             _camera = camera;
             _gameProfile = gameProfile;
-            _inputController = new PaintInputController(_camera);
+            _inputController = new PaintInputController( _camera);
             _paintAllController = new PaintAllController();
         }
-        public MainPainterController(Camera camera, PaintMode paintMode)
+        public MainPainterController(GameProfile gameProfile, Camera camera, PaintMode paintMode)
         {
             _camera = camera;
             _paintMode = paintMode;
-            _inputController = new PaintInputController(_camera);
+            _gameProfile = gameProfile;
+            _inputController = new PaintInputController( _camera);
             _paintAllController = new PaintAllController();
-            //Вызывать метод RUN в View
         }
 
         public Vector3 Points() => _inputController.Points;

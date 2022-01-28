@@ -6,7 +6,7 @@ public class ObjectControlls
     private Transform _objectOfControll;
     private Transform _orignalobject;
     private float _rotationSpeed = 5f;
-    private float _movementSpeed = 0.01f;
+    private float _movementSpeed = 0.0025f;
     private ControllsType _type = ControllsType.Rotation;
     private Vector2 _xValueMovement;
     private Vector2 _yValueMovement;
@@ -31,11 +31,12 @@ public class ObjectControlls
                         {
                             float x = touch.deltaPosition.x * -1 * _rotationSpeed * Time.deltaTime;
                             float y = touch.deltaPosition.y * _rotationSpeed * Time.deltaTime;
-                            _objectOfControll.Rotate(y, x, 0);
+                            _objectOfControll.Rotate(0, x, y);
+                            _objectOfControll.rotation = Quaternion.Euler(0, _objectOfControll.rotation.eulerAngles.y, _objectOfControll.rotation.eulerAngles.z);
                         }
                         if (_type == ControllsType.Movement)
                         {
-                            Vector3 position = _objectOfControll.position;
+                            Vector3 position = _objectOfControll.localPosition;
                             float x = touch.deltaPosition.x * _movementSpeed * Time.deltaTime;
                             float y = touch.deltaPosition.y * _movementSpeed * Time.deltaTime;
                             y += position.y;
@@ -48,7 +49,7 @@ public class ObjectControlls
                             {
                                 position.y = y;
                             }
-                            _objectOfControll.position = position;
+                            _objectOfControll.localPosition = position;
                         }
                         break;
                 }// добавить зум и обсудить удобство управления

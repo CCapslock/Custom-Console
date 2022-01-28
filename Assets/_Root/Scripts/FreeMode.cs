@@ -15,9 +15,11 @@ public class FreeMode : IExecuter
     private ToolMenu _toolMenu;
 
     private GameObject _part;
+    private GameProfile _gameProfile;
 
     public FreeMode(GameProfile gameProfile,Camera camera, Transform canvas, Transform console, Transform workPlace, Transform offScreen)
     {
+        _gameProfile = gameProfile;
         _console = console;
         _workPlace = workPlace;
         _offScreen = offScreen;
@@ -33,8 +35,17 @@ public class FreeMode : IExecuter
     private void CreateView()
     {
         var viewObject = Resources.Load<GameObject>("UI/PartMenuView");
-        _freeModeView = UnityEngine.Object.Instantiate(viewObject, _canvas).GetComponent<FreeModeView>();
-        _freeModeView.Init(null); //поменять когда будет меню игры  
+        _freeModeView = Object.Instantiate(viewObject, _canvas).GetComponent<FreeModeView>();
+        _freeModeView.Init(BackToMenu);  
+    }
+
+    public void BackToMenu()
+    {
+        Object.Destroy(_freeModeView.gameObject);
+        _partSelector = null;
+        _toolMenu = null;
+        _objectControlls = null;
+        _gameProfile.CurrentState.Value = GameMode.MenuMode;
     }
 
     public void Execute()
@@ -54,7 +65,7 @@ public class FreeMode : IExecuter
 
         part.transform.parent = _workPlace;
         part.transform.localPosition = Vector3.zero;
-        part.transform.rotation = Quaternion.Euler(0, 180, 0);
+        part.transform.rotation = Quaternion.Euler(0, 90, 0);
         _partSelector.active = false;
         _part = part;
         _toolMenu.Fill(part.GetComponent<IPart>());        
@@ -63,11 +74,11 @@ public class FreeMode : IExecuter
     {
         _console.parent = _workPlace;
         _console.localPosition = Vector3.zero;
-        _console.rotation = Quaternion.Euler(0,180,0);
+        _console.rotation = Quaternion.Euler(0,90,0);
 
         _part.transform.parent = _console;
         _part.transform.position = _part.GetComponent<IPart>().InitialPosition;
-        _part.transform.rotation = Quaternion.Euler(0, 180, 0);
+        _part.transform.rotation = Quaternion.Euler(0, 90, 0);
         _partSelector.active = true;
         _objectControlls.SetObject(_workPlace);
         _objectControlls.SetRotation();

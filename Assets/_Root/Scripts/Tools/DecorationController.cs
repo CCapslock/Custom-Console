@@ -17,7 +17,7 @@ class DecorationController : IToolController
         _view = Object.Instantiate(viewObject, canvas).GetComponent<DecorationView>();
         _view.Init(UpdateMaterial, refill, BackToChosingPart);
         _camera = camera;
-        foreach(GameObject child in part.JoinedParts)
+        foreach (GameObject child in part.JoinedParts)
         {
             child.TryGetComponent<Decoratable>(out Decoratable result);
             if (result != null)
@@ -47,8 +47,6 @@ class DecorationController : IToolController
                             _chosenDecPart = result;
                             _view.Fill(_decorationMaterials.GetWithType(result.type));
                             UpdateMaterial();
-                            _camera.transform.position = hit.transform.position;
-                            _camera.transform.position = new Vector3(hit.transform.position.x, hit.transform.position.y, (hit.transform.position.z-0.3f));
                         }
                     }
                     break;
@@ -56,8 +54,7 @@ class DecorationController : IToolController
         }
     }
     public void BackToChosingPart()
-    {
-        _camera.transform.position = new Vector3(0, 0, -1); 
+    {      
         _view.Hide();
         _chosenDecPart = null;
     }
@@ -73,6 +70,5 @@ class DecorationController : IToolController
             part.OutlineEnabled = false;
         }
         Object.Destroy(_view.gameObject);
-        _camera.transform.position = new Vector3(0, 0, -1);
     }
 }
